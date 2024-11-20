@@ -31,4 +31,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="ProyectoExterno\Data\Data.csproj" />
+    <ProjectReference Include="ProyectoExterno\WebApi\WebApi.csproj" />
+  </ItemGroup>
+
 </Project>
