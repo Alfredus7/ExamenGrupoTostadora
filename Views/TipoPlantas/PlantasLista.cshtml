@@ -1,0 +1,6 @@
+﻿@model int?
+@{
+    ViewData["Title"] = "PlantaLista";
+}
+<h1>Productos</h1>
+@await Component.InvokeAsync("Plantas", new { id = Model })

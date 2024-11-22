@@ -1,0 +1,18 @@
+﻿@model IEnumerable<ExamenGrupoTostadora.ViewModel.TipoPlantaviewmodel>
+
+@{
+    ViewData["Title"] = "tipos plantas";
+}
+
+<h1>Tipos de plantas</h1>
+
+<ul class="nav flex-column p-3">
+
+
+    @foreach (var item in Model)
+    {
+        <li class="nav-item">
+            <a asp-controller="TipoPlantas" asp-action="PlantasLista" asp-route-id="@item.TipoPlantaId">@item.Descripcion</a>
+        </li>
+    }
+</ul>

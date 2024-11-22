@@ -1,22 +1,117 @@
-html {
-  font-size: 14px;
+/* General */
+body, html {
+    background-image: url('https://img.freepik.com/fotos-premium/escena-anime-mujer-pie-frente-tienda-flores-generativo-ai_1036457-6290.jpg');
+    background-attachment: fixed;
+    background-position: bottom;
+    background-size: cover;
+    color: #004d00; /* Verde oscuro */
+    font-family: 'Source Sans Pro', sans-serif;
+    height: 100%;
+    overflow-x: hidden;
 }
 
-@media (min-width: 768px) {
-  html {
+a, .field-validation-error, span, .nav-link {
+    color: #004d00; /* Verde oscuro */
+}
+
+/* Layout Components */
+header, footer {
+    background-color: #b3ffb3; /* Verde claro */
+    color: #004d00; /* Verde oscuro */
+}
+
+main {
+    background-color: rgba(204, 255, 204, 0.6); /* Verde muy claro semitransparente */
+    color: #004d00; /* Verde oscuro */
+}
+
+.sidebar {
+    background-color: #ccffcc; /* Verde suave */
+    color: #004d00; /* Verde oscuro */
+    opacity: 0.9;
+}
+
+/* Card */
+.card {
+    border: none;
+    border-radius: 10%;
+    background-color: #99e699; /* Verde medio */
+    color: #ffffff; /* Blanco */
+}
+
+.card-img-top {
+    border-radius: 10%;
+    display: block;
+    height: 20em;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Form */
+form {
+    background-color: #b3ffb3; /* Verde claro */
+    padding: 2%;
+    border-radius: 8px;
+    color: #004d00; /* Verde oscuro */
+}
+
+.form-control, .form-select, .form-control:read-only {
+    background-color: #e6ffe6; /* Verde muy claro */
+    border: 2px solid #99e699; /* Verde medio */
+    border-radius: 5px;
     font-size: 16px;
-  }
+    color: #004d00; /* Verde oscuro */
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    .form-control:hover, .form-select:hover {
+        background-color: #ccffcc; /* Verde claro */
+        cursor: pointer;
+        color: #004d00; /* Verde oscuro */
+    }
+
+    .form-control:focus, .form-select:focus {
+        background-color: #b3ffb3; /* Verde intermedio */
+        color: #004d00; /* Verde oscuro */
+        outline: none;
+        border: 2px solid #99e699; /* Verde medio */
+    }
+
+/* Buttons */
+.btn, .btn-primary {
+    background-color: #66cc66; /* Verde medio */
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 2%;
+    color: #ffffff; /* Blanco */
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+    .btn:hover, .btn:focus, .btn:after {
+        background-color: #ccffcc; /* Verde más intenso */
+        border-radius: 5px;
+        cursor: pointer;
+        color: #ffffff; /* Blanco */
+    }
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #e6ffe6; /* Fondo verde claro */
+    color: #004d00; /* Verde oscuro */
 }
 
-body {
-  margin-bottom: 60px;
+thead {
+    background-color: #b3ffb3; /* Fondo del encabezado verde claro */
+    padding: 8px;
+    text-align: left;
+    color: #004d00; /* Verde oscuro */
 }
+
+tbody tr {
+    background-color: #99e699; /* Fondo verde medio */
+    color: #000000; /* Blanco */
+}
+
+    tbody tr:hover {
+        background-color: #66cc66; /* Fondo verde más intenso */
+        color: #ffffff; /* Blanco */
+    }

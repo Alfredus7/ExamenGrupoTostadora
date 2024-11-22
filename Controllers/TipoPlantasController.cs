@@ -144,5 +144,10 @@ namespace ExamenGrupoTostadora.Controllers
         {
             return _context.TipoPlantas.Any(e => e.TipoPlantaId == id);
         }
+
+        public async Task<IActionResult> PlantasLista(int? id)
+        {
+            return View(id);
+        }
     }
 }
