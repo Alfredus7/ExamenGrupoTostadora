@@ -2,7 +2,7 @@
 using System.Net;
 using System.Text;
 
-namespace Unidad3P1.WebApiClients
+namespace ExamenGrupoTostadora.WebApiClients
 {
     /// <summary>
     /// The Corporate Api Client

@@ -1,7 +1,7 @@
 using System.Net;
 using System.Runtime.Serialization;
 
-namespace Unidad3P1.WebApiClients
+namespace ExamenGrupoTostadora.WebApiClients
 {
     [DataContract]
     public class Error

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Unidad3P1.WebApiClients
+namespace ExamenGrupoTostadora.WebApiClients
 {
     public class CoorporateApiResult<T>
     {
