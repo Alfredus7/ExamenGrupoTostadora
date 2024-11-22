@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Data.Models;
+using ExamenGrupoTostadora.ViewModel;
 
 namespace ExamenGrupoTostadora.Controllers
 {
@@ -21,7 +22,11 @@ namespace ExamenGrupoTostadora.Controllers
         // GET: TipoPlantas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TipoPlantas.ToListAsync());
+            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+
+            var modelList = webApiClient.GetTiposDePlantas<List<TipoPlantaviewmodel>>();
+
+            return View(modelList.Data);
         }
 
         // GET: TipoPlantas/Details/5
@@ -32,14 +37,17 @@ namespace ExamenGrupoTostadora.Controllers
                 return NotFound();
             }
 
-            var tipoPlanta = await _context.TipoPlantas
-                .FirstOrDefaultAsync(m => m.TipoPlantaId == id);
-            if (tipoPlanta == null)
+            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+            var Views = webApiClient.GetTipoPlantaById<TipoPlantaviewmodel>(id.Value);
+
+
+            if (Views.Data == null)
             {
                 return NotFound();
             }
 
-            return View(tipoPlanta);
+
+            return View(Views.Data);
         }
 
         // GET: TipoPlantas/Create
@@ -53,12 +61,12 @@ namespace ExamenGrupoTostadora.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TipoPlantaId,Descripcion")] TipoPlanta tipoPlanta)
+        public async Task<IActionResult> Create([Bind("TipoPlantaId,Descripcion")] TipoPlantaviewmodel tipoPlanta)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tipoPlanta);
-                await _context.SaveChangesAsync();
+                WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+                var Views = webApiClient.PostTipoPlanta<TipoPlantaviewmodel>(tipoPlanta);
                 return RedirectToAction(nameof(Index));
             }
             return View(tipoPlanta);
@@ -72,12 +80,16 @@ namespace ExamenGrupoTostadora.Controllers
                 return NotFound();
             }
 
-            var tipoPlanta = await _context.TipoPlantas.FindAsync(id);
-            if (tipoPlanta == null)
+
+            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+            var Views = webApiClient.GetTipoPlantaById<TipoPlantaviewmodel>(id.Value);
+
+            if (Views.Data == null)
             {
                 return NotFound();
             }
-            return View(tipoPlanta);
+
+            return View(Views.Data);
         }
 
         // POST: TipoPlantas/Edit/5
@@ -85,31 +97,12 @@ namespace ExamenGrupoTostadora.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TipoPlantaId,Descripcion")] TipoPlanta tipoPlanta)
+        public async Task<IActionResult> Edit(int id, [Bind("TipoPlantaId,Descripcion")] TipoPlantaviewmodel tipoPlanta)
         {
-            if (id != tipoPlanta.TipoPlantaId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(tipoPlanta);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TipoPlantaExists(tipoPlanta.TipoPlantaId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+                var Views = webApiClient.PutTipoPlanta<TipoPlantaviewmodel, TipoPlanta>(id, tipoPlanta);
                 return RedirectToAction(nameof(Index));
             }
             return View(tipoPlanta);
@@ -123,14 +116,14 @@ namespace ExamenGrupoTostadora.Controllers
                 return NotFound();
             }
 
-            var tipoPlanta = await _context.TipoPlantas
-                .FirstOrDefaultAsync(m => m.TipoPlantaId == id);
-            if (tipoPlanta == null)
+            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+            var Views = webApiClient.GetTipoPlantaById<TipoPlantaviewmodel>(id.Value);
+
+            if (Views.Data == null)
             {
                 return NotFound();
             }
-
-            return View(tipoPlanta);
+            return View(Views.Data);
         }
 
         // POST: TipoPlantas/Delete/5
@@ -138,13 +131,12 @@ namespace ExamenGrupoTostadora.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tipoPlanta = await _context.TipoPlantas.FindAsync(id);
-            if (tipoPlanta != null)
+            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+            var Views = webApiClient.DeleteTipoPlantaById<TipoPlantaviewmodel>(id);
+            if (Views.Data == false)
             {
-                _context.TipoPlantas.Remove(tipoPlanta);
+                BadRequest();
             }
-
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

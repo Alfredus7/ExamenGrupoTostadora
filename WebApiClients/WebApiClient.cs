@@ -46,21 +46,21 @@ namespace ExamenGrupoTostadora.WebApiClients
         /// <returns></returns>
         public CoorporateApiResult<T> GetTiposDePlantas<T>()
         {
-            string address = "api/TipoPlanta";
+            string address = "api/TipoPlantas";
 
             return GetData<T>(address);
         }
 
         public CoorporateApiResult<T> GetTipoPlantaById<T>(int id)
         {
-            string address = $"api/TipoPlanta/{id}";
+            string address = $"api/TipoPlantas/{id}";
 
             return GetData<T>(address);
         }
 
         public CoorporateApiResult<bool> DeleteTipoPlantaById<T>(int id)
         {
-            string recurso = $"api/TipoPlanta/{id}";
+            string recurso = $"api/TipoPlantas/{id}";
 
             string address = GenerateApiAddress(recurso);
 
@@ -69,15 +69,16 @@ namespace ExamenGrupoTostadora.WebApiClients
 
         public CoorporateApiResult<TipoPlantaViewModel> PostTipoPlanta<TipoPlantaViewModel>(TipoPlantaViewModel modelTipoPlanta)
         {
-            string recurso = $"api/TipoPlanta";
+            string recurso = $"api/TipoPlantas";
             string source = GenerateApiAddress(recurso);
             return PostData<TipoPlantaViewModel, TipoPlantaViewModel>(source, modelTipoPlanta);
         }
 
         public CoorporateApiResult<TU> PutTipoPlanta<T, TU>(int id, T model)
         {
-            string recurso = $"api/TipoPlanta/{id}";
-            string address = GenerateApiAddress(recurso);
+
+            string address = $"api/TipoPlantas/{id}";
+
             return PutData<T, TU>(model, address);
         }
         #endregion
@@ -93,21 +94,21 @@ namespace ExamenGrupoTostadora.WebApiClients
         /// <returns></returns>
         public CoorporateApiResult<T> GetPlantas<T>()
         {
-            string address = "api/Planta";
+            string address = "api/Plantas";
 
             return GetData<T>(address);
         }
 
         public CoorporateApiResult<T> GetPlantaById<T>(int id)
         {
-            string address = $"api/Planta/{id}";
+            string address = $"api/Plantas/{id}";
 
             return GetData<T>(address);
         }
 
         public CoorporateApiResult<bool> DeletePlantaById<T>(int id)
         {
-            string recurso = $"api/Planta/{id}";
+            string recurso = $"api/Plantas/{id}";
 
             string address = GenerateApiAddress(recurso);
 
@@ -116,15 +117,15 @@ namespace ExamenGrupoTostadora.WebApiClients
 
         public CoorporateApiResult<PlantaViewModel> PostPlanta<PlantaViewModel>(PlantaViewModel modelPlanta)
         {
-            string recurso = $"api/Planta";
+            string recurso = $"api/Plantas";
             string source = GenerateApiAddress(recurso);
             return PostData<PlantaViewModel, PlantaViewModel>(source, modelPlanta);
         }
 
         public CoorporateApiResult<TU> PutPlanta<T, TU>(int id, T model)
         {
-            string recurso = $"api/Planta/{id}";
-            string address = GenerateApiAddress(recurso);
+            string address = $"api/Plantas/{id}";
+
             return PutData<T, TU>(model, address);
         }
 
