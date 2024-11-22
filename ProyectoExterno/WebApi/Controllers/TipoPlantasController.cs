@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data.Models;
+using AutoMapper;
 
 namespace WebApi.Controllers
 {
@@ -14,22 +15,25 @@ namespace WebApi.Controllers
     public class TipoPlantasController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-
-        public TipoPlantasController(ApplicationDbContext context)
+        private readonly IMapper _mapper;
+        public TipoPlantasController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/TipoPlantas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TipoPlanta>>> GetTipoPlantas()
+        public async Task<ActionResult<IEnumerable<TipoPlantaDTOS>>> GetTipoPlantas()
         {
-            return await _context.TipoPlantas.ToListAsync();
+            var entidades = await _context.TipoPlantas.ToListAsync();
+            var modelList = _mapper.Map<List<TipoPlantaDTOS>>(entidades);
+            return Ok(modelList);
         }
 
         // GET: api/TipoPlantas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TipoPlanta>> GetTipoPlanta(int id)
+        public async Task<ActionResult<TipoPlantaDTOS>> GetTipoPlanta(int id)
         {
             var tipoPlanta = await _context.TipoPlantas.FindAsync(id);
 
@@ -38,20 +42,21 @@ namespace WebApi.Controllers
                 return NotFound();
             }
 
-            return tipoPlanta;
+            var tipoPlantaDto = _mapper.Map<TipoPlantaDTOS>(tipoPlanta);
+            return Ok(tipoPlantaDto);
         }
 
         // PUT: api/TipoPlantas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTipoPlanta(int id, TipoPlanta tipoPlanta)
+        public async Task<IActionResult> PutTipoPlanta(int id, TipoPlantaDTOS tipoPlantaDto)
         {
-            if (id != tipoPlanta.TipoPlantaId)
+            if (id != tipoPlantaDto.TipoPlantaId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tipoPlanta).State = EntityState.Modified;
+            var tipoPlantaEntity = _mapper.Map<TipoPlanta>(tipoPlantaDto);
+            _context.Entry(tipoPlantaEntity).State = EntityState.Modified;
 
             try
             {
@@ -73,14 +78,16 @@ namespace WebApi.Controllers
         }
 
         // POST: api/TipoPlantas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TipoPlanta>> PostTipoPlanta(TipoPlanta tipoPlanta)
+        public async Task<ActionResult<TipoPlantaDTOS>> PostTipoPlanta(TipoPlantaDTOS tipoPlantaDto)
         {
-            _context.TipoPlantas.Add(tipoPlanta);
+            var tipoPlantaEntity = _mapper.Map<TipoPlanta>(tipoPlantaDto);
+            _context.TipoPlantas.Add(tipoPlantaEntity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTipoPlanta", new { id = tipoPlanta.TipoPlantaId }, tipoPlanta);
+            var createdTipoPlantaDto = _mapper.Map<TipoPlantaDTOS>(tipoPlantaEntity);
+
+            return CreatedAtAction("GetTipoPlanta", new { id = createdTipoPlantaDto.TipoPlantaId }, createdTipoPlantaDto);
         }
 
         // DELETE: api/TipoPlantas/5

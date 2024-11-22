@@ -15,6 +15,9 @@ namespace Data.Models
         public int TipoPlantaId { get; set; }
         public string Descripcion { get; set; }
         public virtual ICollection<Planta>? Plantas { get; set; }
+
+
+
     }
 
 }

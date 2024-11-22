@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Data.Models;
+using AutoMapper;
 
 namespace WebApi.Controllers
 {
@@ -14,10 +15,13 @@ namespace WebApi.Controllers
     public class PlantasController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public PlantasController(ApplicationDbContext context)
+        public PlantasController(ApplicationDbContext context,
+            IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Plantas

@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
+    [Table("Planta")]
     public class Planta
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int TipoPlantaId { get; set; }

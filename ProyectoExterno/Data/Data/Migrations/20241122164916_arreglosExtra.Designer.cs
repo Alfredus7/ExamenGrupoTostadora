@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExamenGrupoTostadora.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241122164916_arreglosExtra")]
+    partial class arreglosExtra
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,7 +111,7 @@ namespace ExamenGrupoTostadora.Data.Migrations
 
                     b.HasIndex("TipoPlantaId");
 
-                    b.ToTable("Planta", (string)null);
+                    b.ToTable("Planta");
                 });
 
             modelBuilder.Entity("Data.Models.TipoPlanta", b =>
@@ -125,7 +128,7 @@ namespace ExamenGrupoTostadora.Data.Migrations
 
                     b.HasKey("TipoPlantaId");
 
-                    b.ToTable("TipoPlanta", (string)null);
+                    b.ToTable("TipoPlanta");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
