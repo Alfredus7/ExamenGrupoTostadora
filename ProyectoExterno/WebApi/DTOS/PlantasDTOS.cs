@@ -15,7 +15,7 @@ namespace Data.Models
         public string Nombre { get; set; }
         public int TipoPlantaId { get; set; }
 
-        public virtual TipoPlanta? TipoPlanta { get; set; }
+        public virtual TipoPlantaDTOS? TipoPlanta { get; set; }
     }
 
 }

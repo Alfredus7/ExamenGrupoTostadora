@@ -17,8 +17,7 @@ namespace WebApi.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public PlantasController(ApplicationDbContext context,
-            IMapper mapper)
+        public PlantasController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -26,36 +25,45 @@ namespace WebApi.Controllers
 
         // GET: api/Plantas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Planta>>> GetPlantas()
+        public async Task<ActionResult<IEnumerable<PlantasDTOS>>> GetPlantas()
         {
-            return await _context.Plantas.ToListAsync();
+            var plantas = await _context.Plantas
+                                        .Include(p => p.TipoPlanta) // Include the Categoria
+                                        .ToListAsync();
+
+            var plantasDto = _mapper.Map<List<PlantasDTOS>>(plantas); // Map to DTO
+
+            return Ok(plantasDto);
         }
 
         // GET: api/Plantas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Planta>> GetPlanta(int id)
+        public async Task<ActionResult<PlantasDTOS>> GetPlanta(int id)
         {
-            var planta = await _context.Plantas.FindAsync(id);
+            var planta = await _context.Plantas
+                                        .Include(p => p.TipoPlanta) // Include the Categoria
+                                        .FirstOrDefaultAsync(p => p.Id == id);
 
             if (planta == null)
             {
                 return NotFound();
             }
 
-            return planta;
+            var plantaDto = _mapper.Map<PlantasDTOS>(planta); // Map to DTO
+            return Ok(plantaDto);
         }
 
         // PUT: api/Plantas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPlanta(int id, Planta planta)
+        public async Task<IActionResult> PutPlanta(int id, PlantasDTOS plantaDto)
         {
-            if (id != planta.Id)
+            if (id != plantaDto.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(planta).State = EntityState.Modified;
+            var plantaEntity = _mapper.Map<Planta>(plantaDto);
+            _context.Entry(plantaEntity).State = EntityState.Modified;
 
             try
             {
@@ -77,14 +85,17 @@ namespace WebApi.Controllers
         }
 
         // POST: api/Plantas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Planta>> PostPlanta(Planta planta)
+        public async Task<ActionResult<PlantasDTOS>> PostPlanta(PlantasDTOS plantaDto)
         {
-            _context.Plantas.Add(planta);
+            var plantaEntity = _mapper.Map<Planta>(plantaDto);
+
+            _context.Plantas.Add(plantaEntity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPlanta", new { id = planta.Id }, planta);
+            var newPlantaDto = _mapper.Map<PlantasDTOS>(plantaEntity);
+
+            return CreatedAtAction("GetPlanta", new { id = plantaEntity.Id }, newPlantaDto);
         }
 
         // DELETE: api/Plantas/5
@@ -109,3 +120,4 @@ namespace WebApi.Controllers
         }
     }
 }
+
