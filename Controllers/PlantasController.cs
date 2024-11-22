@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Data.Models;
+using ExamenGrupoTostadora.ViewModel;
 
 namespace ExamenGrupoTostadora.Controllers
 {
@@ -21,27 +22,33 @@ namespace ExamenGrupoTostadora.Controllers
         // GET: Plantas
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Plantas.Include(p => p.TipoPlanta);
-            return View(await applicationDbContext.ToListAsync());
+            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+
+            var modelList = webApiClient.GetPlantas<List<Plantasviewmodel>>();
+
+            return View(modelList.Data);
         }
 
         // GET: Plantas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var planta = await _context.Plantas
-                .Include(p => p.TipoPlanta)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (planta == null)
+            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+            var Views = webApiClient.GetPlantaById<Plantasviewmodel>(id.Value);
+
+
+            if (Views.Data == null)
             {
                 return NotFound();
             }
 
-            return View(planta);
+
+            return View(Views.Data);
         }
 
         // GET: Plantas/Create
@@ -56,12 +63,13 @@ namespace ExamenGrupoTostadora.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,TipoPlantaId")] Planta planta)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,TipoPlantaId")] Plantasviewmodel planta)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(planta);
-                await _context.SaveChangesAsync();
+
+                WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+                var Views = webApiClient.PostPlanta<Plantasviewmodel>(planta);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Descripcion", planta.TipoPlantaId);
@@ -76,13 +84,16 @@ namespace ExamenGrupoTostadora.Controllers
                 return NotFound();
             }
 
-            var planta = await _context.Plantas.FindAsync(id);
-            if (planta == null)
+            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+            var Views = webApiClient.GetPlantaById<Plantasviewmodel>(id.Value);
+            ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Descripcion", Views.Data.TipoPlantaId);
+            
+            if (Views.Data == null)
             {
                 return NotFound();
             }
-            ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Descripcion", planta.TipoPlantaId);
-            return View(planta);
+
+            return View(Views.Data);
         }
 
         // POST: Plantas/Edit/5
@@ -90,31 +101,12 @@ namespace ExamenGrupoTostadora.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,TipoPlantaId")] Planta planta)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,TipoPlantaId")] Plantasviewmodel planta)
         {
-            if (id != planta.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(planta);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PlantaExists(planta.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+                var Views = webApiClient.PutPlanta<Plantasviewmodel, Planta>(id, planta);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Descripcion", planta.TipoPlantaId);
@@ -129,15 +121,14 @@ namespace ExamenGrupoTostadora.Controllers
                 return NotFound();
             }
 
-            var planta = await _context.Plantas
-                .Include(p => p.TipoPlanta)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (planta == null)
+            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+            var Views = webApiClient.GetPlantaById<Plantasviewmodel>(id.Value);
+
+            if (Views.Data == null)
             {
                 return NotFound();
             }
-
-            return View(planta);
+            return View(Views.Data);
         }
 
         // POST: Plantas/Delete/5
@@ -145,13 +136,13 @@ namespace ExamenGrupoTostadora.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var planta = await _context.Plantas.FindAsync(id);
-            if (planta != null)
-            {
-                _context.Plantas.Remove(planta);
-            }
 
-            await _context.SaveChangesAsync();
+            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+            var Views = webApiClient.DeletePlantaById<Plantasviewmodel>(id);
+            if (Views.Data == false)
+            {
+                BadRequest();
+            }
             return RedirectToAction(nameof(Index));
         }
 
