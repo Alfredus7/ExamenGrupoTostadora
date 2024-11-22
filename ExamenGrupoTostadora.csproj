@@ -40,4 +40,8 @@
     <ProjectReference Include="ProyectoExterno\Data\Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="WebApiClient\" />
+  </ItemGroup>
+
 </Project>
