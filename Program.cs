@@ -1,5 +1,4 @@
 using ExamenGrupoTostadora.AutoMapperProfiles;
-using ExamenGrupoTostadora.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

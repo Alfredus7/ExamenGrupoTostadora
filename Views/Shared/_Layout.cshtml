@@ -37,29 +37,13 @@
 
     <div class="container-fluid flex-grow-1">
         <div class="row h-100">
-            @if (User.Identity.IsAuthenticated)
-            {
-              
-                <nav class="col-md-2 d-none d-md-block sidebar">
-                    <div class="position-sticky">
-                        
-                            @await Component.InvokeAsync("TipoPlanta")
-                        
-                    </div>
-                </nav>
-            }
-            else
-            {
-                <nav class="col-md-2 d-none d-md-block sidebar">
-                    <div class="position-sticky">
-                        <ul class="nav flex-column p-3">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            }
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <div class="position-sticky">
+
+                    @await Component.InvokeAsync("TipoPlanta")
+
+                </div>
+            </nav>
             <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 @RenderBody()
             </main>

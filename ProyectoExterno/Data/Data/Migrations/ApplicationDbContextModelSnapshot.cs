@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ExamenGrupoTostadora.Data.Migrations
+namespace WebApplication1.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -40,9 +40,6 @@ namespace ExamenGrupoTostadora.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("FechaNacimiento")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -65,6 +62,9 @@ namespace ExamenGrupoTostadora.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("PlantaFavorita")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -108,7 +108,7 @@ namespace ExamenGrupoTostadora.Data.Migrations
 
                     b.HasIndex("TipoPlantaId");
 
-                    b.ToTable("Planta", (string)null);
+                    b.ToTable("Planta");
                 });
 
             modelBuilder.Entity("Data.Models.TipoPlanta", b =>
@@ -119,13 +119,13 @@ namespace ExamenGrupoTostadora.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TipoPlantaId"));
 
-                    b.Property<string>("Descripcion")
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TipoPlantaId");
 
-                    b.ToTable("TipoPlanta", (string)null);
+                    b.ToTable("TipoPlanta");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

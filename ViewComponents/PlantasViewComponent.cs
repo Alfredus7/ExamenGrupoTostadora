@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using ExamenGrupoTostadora.Data;
 using ExamenGrupoTostadora.ViewModel;
 
 namespace ExamenGrupoTostadora.ViewComponents

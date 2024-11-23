@@ -3,5 +3,5 @@ using System;
 
 public class ApplicationUser : IdentityUser
 {
-    public DateTime? FechaNacimiento { get; set; }
+    public string? PlantaFavorita { get; set; }
 }

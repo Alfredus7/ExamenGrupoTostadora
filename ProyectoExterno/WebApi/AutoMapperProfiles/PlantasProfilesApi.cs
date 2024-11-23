@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Data.Models;
-using ExamenGrupoTostadora.Data.Migrations;
 
 namespace WebApi.AutoMapperProfiles
 {

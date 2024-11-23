@@ -100,9 +100,9 @@ namespace ExamenGrupoTostadora.Areas.Identity.Pages.Account
 
 
             [Required]
-            [DataType(DataType.Date)]
-            [Display(Name = "Fecha de Nacimiento")]
-            public DateTime FechaNacimiento { get; set; }
+            [DataType(DataType.Text)]
+            [Display(Name = "Plantas Favoritas")]
+            public string PLantasFavoritas { get; set; }
         }
 
 
@@ -123,8 +123,8 @@ namespace ExamenGrupoTostadora.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
-                // Asignar el valor de FechaNacimiento al usuario
-                user.FechaNacimiento = Input.FechaNacimiento;
+                // Asignar el valor de PLantasFavoritas al usuario
+                user.PlantaFavorita = Input.PLantasFavoritas;
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

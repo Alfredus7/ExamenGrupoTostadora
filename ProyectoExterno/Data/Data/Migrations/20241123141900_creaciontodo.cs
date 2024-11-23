@@ -2,29 +2,35 @@
 
 #nullable disable
 
-namespace ExamenGrupoTostadora.Data.Migrations
+namespace WebApplication1.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Plantas : Migration
+    public partial class creaciontodo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<string>(
+                name: "PlantaFavorita",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
+
             migrationBuilder.CreateTable(
-                name: "TipoPlantas",
+                name: "TipoPlanta",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    TipoPlantaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoPlantas", x => x.Id);
+                    table.PrimaryKey("PK_TipoPlanta", x => x.TipoPlantaId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Plantas",
+                name: "Planta",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -34,18 +40,18 @@ namespace ExamenGrupoTostadora.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Plantas", x => x.Id);
+                    table.PrimaryKey("PK_Planta", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Plantas_TipoPlantas_TipoPlantaId",
+                        name: "FK_Planta_TipoPlanta_TipoPlantaId",
                         column: x => x.TipoPlantaId,
-                        principalTable: "TipoPlantas",
-                        principalColumn: "Id",
+                        principalTable: "TipoPlanta",
+                        principalColumn: "TipoPlantaId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Plantas_TipoPlantaId",
-                table: "Plantas",
+                name: "IX_Planta_TipoPlantaId",
+                table: "Planta",
                 column: "TipoPlantaId");
         }
 
@@ -53,10 +59,14 @@ namespace ExamenGrupoTostadora.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Plantas");
+                name: "Planta");
 
             migrationBuilder.DropTable(
-                name: "TipoPlantas");
+                name: "TipoPlanta");
+
+            migrationBuilder.DropColumn(
+                name: "PlantaFavorita",
+                table: "AspNetUsers");
         }
     }
 }

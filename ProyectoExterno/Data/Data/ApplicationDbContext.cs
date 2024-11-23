@@ -12,4 +12,3 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Planta> Plantas { get; set; }
     public DbSet<TipoPlanta> TipoPlantas { get; set; }
 }
-

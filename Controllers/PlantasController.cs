@@ -54,7 +54,7 @@ namespace ExamenGrupoTostadora.Controllers
         // GET: Plantas/Create
         public IActionResult Create()
         {
-            ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Descripcion");
+            ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Nombre");
             return View();
         }
 
@@ -72,7 +72,7 @@ namespace ExamenGrupoTostadora.Controllers
                 var Views = webApiClient.PostPlanta<Plantasviewmodel>(planta);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Descripcion", planta.TipoPlantaId);
+            ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Nombre", planta.TipoPlantaId);
             return View(planta);
         }
 
@@ -86,7 +86,7 @@ namespace ExamenGrupoTostadora.Controllers
 
             WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
             var Views = webApiClient.GetPlantaById<Plantasviewmodel>(id.Value);
-            ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Descripcion", Views.Data.TipoPlantaId);
+            ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Nombre", Views.Data.TipoPlantaId);
             
             if (Views.Data == null)
             {
@@ -109,7 +109,7 @@ namespace ExamenGrupoTostadora.Controllers
                 var Views = webApiClient.PutPlanta<Plantasviewmodel, Planta>(id, planta);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Descripcion", planta.TipoPlantaId);
+            ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Nombre", planta.TipoPlantaId);
             return View(planta);
         }
 
