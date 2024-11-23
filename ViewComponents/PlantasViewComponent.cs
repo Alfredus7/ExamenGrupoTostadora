@@ -19,11 +19,13 @@ namespace ExamenGrupoTostadora.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync(int? id)
         {
-            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
 
-            var modelList = webApiClient.GetPlantas<List<Plantasviewmodel>>();
+            var entidades = await _context.Plantas
+                .Where(x => x.TipoPlantaId == id)
+                .ToListAsync();
+            var modelsList = _mapper.Map<List<Plantasviewmodel>>(entidades);
 
-            return View(modelList.Data);
+            return View(modelsList);
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using ExamenGrupoTostadora.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ExamenGrupoTostadora.Data;
+using ExamenGrupoTostadora.ViewModel;
 
-namespace Unidad3P1.ViewComponents
+namespace ExamenGrupoTostadora.ViewComponents
 {
     public class TipoPlantaViewComponent : ViewComponent
     {
@@ -19,9 +19,12 @@ namespace Unidad3P1.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var entidades = await Context.TipoPlantas.ToListAsync();
-            var modelList = Mapper.Map<List<TipoPlantaviewmodel>>(entidades);
-            return View(modelList);
+            
+            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+
+            var modelList = webApiClient.GetTiposDePlantas<List<TipoPlantaviewmodel>>();
+
+            return View(modelList.Data);
         }
 
     }
