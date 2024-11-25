@@ -61,7 +61,7 @@ namespace ExamenGrupoTostadora.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TipoPlantaId,Nombre")] TipoPlantaviewmodel tipoPlanta)
+        public async Task<IActionResult> Create([Bind("TipoPlantaId,Nombre,Caracteristicas,Habitat,ClimaIdeal,EsComestible")] TipoPlantaviewmodel tipoPlanta)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace ExamenGrupoTostadora.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TipoPlantaId,Nombre")] TipoPlantaviewmodel tipoPlanta)
+        public async Task<IActionResult> Edit(int id, [Bind("TipoPlantaId,Nombre,Caracteristicas,Habitat,ClimaIdeal,EsComestible")] TipoPlantaviewmodel tipoPlanta)
         {
             if (ModelState.IsValid)
             {

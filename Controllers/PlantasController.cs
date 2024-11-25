@@ -32,7 +32,6 @@ namespace ExamenGrupoTostadora.Controllers
         // GET: Plantas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-
             if (id == null)
             {
                 return NotFound();
@@ -63,11 +62,10 @@ namespace ExamenGrupoTostadora.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,TipoPlantaId")] Plantasviewmodel planta)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion,Precio,Stock,ImagenUrl,Tamaño,Disponible,TipoPlantaId")] Plantasviewmodel planta)
         {
             if (ModelState.IsValid)
             {
-
                 WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
                 var Views = webApiClient.PostPlanta<Plantasviewmodel>(planta);
                 return RedirectToAction(nameof(Index));
@@ -87,7 +85,7 @@ namespace ExamenGrupoTostadora.Controllers
             WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
             var Views = webApiClient.GetPlantaById<Plantasviewmodel>(id.Value);
             ViewData["TipoPlantaId"] = new SelectList(_context.TipoPlantas, "TipoPlantaId", "Nombre", Views.Data.TipoPlantaId);
-            
+
             if (Views.Data == null)
             {
                 return NotFound();
@@ -101,9 +99,9 @@ namespace ExamenGrupoTostadora.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,TipoPlantaId")] Plantasviewmodel planta)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion,Precio,Stock,ImagenUrl,Tamaño,Disponible,TipoPlantaId")] Plantasviewmodel planta)
         {
-            if (ModelState.IsValid)
+             if (ModelState.IsValid)
             {
                 WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
                 var Views = webApiClient.PutPlanta<Plantasviewmodel, Planta>(id, planta);
@@ -136,7 +134,6 @@ namespace ExamenGrupoTostadora.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-
             WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
             var Views = webApiClient.DeletePlantaById<Plantasviewmodel>(id);
             if (Views.Data == false)

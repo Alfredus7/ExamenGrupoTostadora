@@ -13,7 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Caracteristicas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Habitat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClimaIdeal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EsComestible)
             </th>
             <th></th>
         </tr>
@@ -22,7 +34,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Caracteristicas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Habitat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClimaIdeal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EsComestible)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.TipoPlantaId">Edit</a> |

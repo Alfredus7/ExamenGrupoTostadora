@@ -13,8 +13,14 @@ namespace Data.Models
     {
         [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TipoPlantaId { get; set; }
-        public string Descripcion { get; set; }
-        
+        public string Nombre { get; set; }
+
+        public string Caracteristicas { get; set; }
+        public string Habitat { get; set; }
+        public string ClimaIdeal { get; set; }
+        public bool EsComestible { get; set; }
+
+
     }
 
 }

@@ -125,23 +125,23 @@ namespace WebApplication1.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TipoPlantaId")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TipoPlantaId");
+                    b.HasIndex("Id");
 
                     b.ToTable("Planta");
                 });
 
             modelBuilder.Entity("Data.Models.TipoPlanta", b =>
                 {
-                    b.Property<int>("TipoPlantaId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TipoPlantaId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Caracteristicas")
                         .IsRequired()
@@ -162,7 +162,7 @@ namespace WebApplication1.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TipoPlantaId");
+                    b.HasKey("Id");
 
                     b.ToTable("TipoPlanta");
                 });
@@ -308,7 +308,7 @@ namespace WebApplication1.Data.Migrations
                 {
                     b.HasOne("Data.Models.TipoPlanta", "TipoPlanta")
                         .WithMany("Plantas")
-                        .HasForeignKey("TipoPlantaId")
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
