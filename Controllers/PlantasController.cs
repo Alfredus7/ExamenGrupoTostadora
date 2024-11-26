@@ -147,5 +147,27 @@ namespace ExamenGrupoTostadora.Controllers
         {
             return _context.Plantas.Any(e => e.Id == id);
         }
+
+
+
+        public async Task<IActionResult> PlantaDetalles(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            WebApiClients.WebApiClient webApiClient = new WebApiClients.WebApiClient();
+            var Views = webApiClient.GetPlantaById<Plantasviewmodel>(id.Value);
+
+
+            if (Views.Data == null)
+            {
+                return NotFound();
+            }
+
+
+            return View(Views.Data);
+        }
     }
 }
