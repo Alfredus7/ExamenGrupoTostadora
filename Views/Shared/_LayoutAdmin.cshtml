@@ -37,41 +37,13 @@
 
     <div class="container-fluid flex-grow-1">
         <div class="row h-100">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <nav class="col-md-2 d-none d-md-block sidebar">
-                    <div class="position-sticky">
-                        <ul class="nav flex-column p-3">
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <div class="position-sticky">
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Plantas" asp-action="Index">Plantas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="TipoPlantas" asp-action="Index">TipoPlantas</a>
-                            </li>
+                    @await Component.InvokeAsync("TipoPlanta")
 
-                        </ul>
-                    </div>
-                </nav>
-            }
-            else
-            {
-                <nav class="col-md-2 d-none d-md-block sidebar">
-                    <div class="position-sticky">
-                        <ul class="nav flex-column p-3">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            }
+                </div>
+            </nav>
             <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 @RenderBody()
             </main>
@@ -80,7 +52,7 @@
 
     <footer class="footer mt-auto py-3">
         <div class="container m-3">
-            <span>cuantos kilos va a mover hoy  - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></span>
+            <span>tiendita toda humilde con plantas del tropico del chapare- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></span>
         </div>
     </footer>
 
@@ -91,3 +63,5 @@
 </body>
 
 </html>
+
+
