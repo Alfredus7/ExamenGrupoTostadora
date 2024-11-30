@@ -1,48 +1,33 @@
 ﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+/*header, footer {
+    background-color: #b3ffb3;*/ /* Verde claro */
+    /*color: #004d00;*/ /* Verde oscuro */
+/*}
 
-/*a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
+main {
+    background-color: rgba(204, 255, 204, 0.6);*/ /* Verde muy claro semitransparente */
+    /*color: #004d00;*/ /* Verde oscuro */
+/*}
 
-a {
-  color: #0077cc;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+.sidebar {
+    background-color: #ccffcc;*/ /* Verde suave */
+    /*color: #004d00;*/ /* Verde oscuro */
+    /*opacity: 0.9;
 }*/
+
+header, footer {
+    background-color: #ff9900; /* Verde claro */
+    color: #02c577; /* Verde oscuro */
+}
+
+main {
+    background-color: rgba(233, 172, 5, 0.46); /* Verde muy claro semitransparente */
+    color: #042f04; /* Verde oscuro */
+}
+
+.sidebar {
+    background-color: #0c1ae4; /* Verde suave */
+    color: #004d00; /* Verde oscuro */
+    opacity: 0.9;
+}

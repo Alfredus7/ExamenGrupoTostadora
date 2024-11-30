@@ -15,21 +15,7 @@ a, .field-validation-error, span, .nav-link {
 }
 
 /* Layout Components */
-header, footer {
-    background-color: #b3ffb3; /* Verde claro */
-    color: #004d00; /* Verde oscuro */
-}
 
-main {
-    background-color: rgba(204, 255, 204, 0.6); /* Verde muy claro semitransparente */
-    color: #004d00; /* Verde oscuro */
-}
-
-.sidebar {
-    background-color: #ccffcc; /* Verde suave */
-    color: #004d00; /* Verde oscuro */
-    opacity: 0.9;
-}
 
 /* Card */
 .card {
