@@ -98,7 +98,9 @@ namespace ExamenGrupoTostadora.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-
+            /// <summary>
+            /// CAMPO PLANTAS
+            /// </summary>
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Plantas Favoritas")]
@@ -111,7 +113,11 @@ namespace ExamenGrupoTostadora.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
