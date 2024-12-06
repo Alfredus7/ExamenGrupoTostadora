@@ -17,17 +17,44 @@ main {
 }*/
 
 header, footer {
-    background-color: #ff9900; /* Verde claro */
-    color: #02c577; /* Verde oscuro */
+    background-color: #145a32; /* Verde oscuro */
+    color: #d4f4dd; /* Verde claro para texto */
 }
 
 main {
-    background-color: rgba(233, 172, 5, 0.46); /* Verde muy claro semitransparente */
-    color: #042f04; /* Verde oscuro */
+    background-color: rgba(20, 90, 50, 0.8); /* Verde oscuro semi-transparente */
+    color: #e9f5e1; /* Verde claro para texto */
 }
 
 .sidebar {
-    background-color: #0c1ae4; /* Verde suave */
-    color: #004d00; /* Verde oscuro */
+    background-color: rgba(30, 130, 76, 0.85); /* Verde brillante semi-transparente */
+    color: #f2fff5; /* Contraste claro */
     opacity: 0.9;
 }
+
+.navbar .nav-link {
+    background-color: #28a745; /* Verde brillante */
+    color: #ffffff; /* Texto blanco para contraste */
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin: 0 5px;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #1e8449; /* Verde oscuro para bordes */
+}
+
+    .navbar .nav-link:hover {
+        background-color: #1e8449; /* Verde oscuro al pasar el ratón */
+        color: #d4f4dd; /* Texto más claro */
+        transform: scale(1.1); /* Efecto de botón */
+    }
+
+.footer a {
+    color: #28a745; /* Verde brillante para enlaces en el footer */
+    text-decoration: none;
+}
+
+    .footer a:hover {
+        color: #1e8449; /* Verde oscuro al pasar el ratón */
+        text-decoration: underline;
+    }
+
